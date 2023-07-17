@@ -7,10 +7,10 @@
 
     <div>
         @foreach ($dailies as $daily)
-            <div class="py-6">
+            <div class="pb-10">
                 <h1 class="inline text-2xl font-bold">{{ $daily->title }}</h1>
                 <span class="pl-10 text-sm">{{ $daily->user->name }}</span>
-                <p class="pt-2 text-base">{{ $daily->body }}</p>
+                <p class="pt-3 text-base">{{ $daily->body }}</p>
             </div>
         @endforeach
     </div>
