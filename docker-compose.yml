@@ -3,7 +3,7 @@ version: '3.8' # composeファイル（≠docker compose）のバージョンを
 services:
   # phpの設定
   app:
-    container_name: app_demo-follows
+    container_name: app_share-daily
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
@@ -19,7 +19,7 @@ services:
 
   # nginxの設定
   web: # サービス名を指定
-    container_name: nginx_demo-follows # コンテナ名を指定
+    container_name: nginx_share-daily # コンテナ名を指定
     build: # ビルドするDockerfileの設定
       context: . # docker buildコマンドを実行する場所を指定（基本ルートディレクトリを指定しておけば良い）
       dockerfile: ./docker/nginx/Dockerfile # Dockerfileがあるパスを指定
@@ -32,7 +32,7 @@ services:
   
   # mysqlの設定
   db:
-    container_name: mysql_demo-follows
+    container_name: mysql_share-daily
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
