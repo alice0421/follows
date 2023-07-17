@@ -41,4 +41,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function dailies()
+    {
+        return $this->hasMany(Daily::class);
+    }
+
+    // 自分を (繋ぎ先) フォローしているユーザー（フォロワー） (繋ぎ元) をリレーション
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followee_user_id', 'follower_user_id')->withTimestamps();
+    }
+
+    // 自分 (繋ぎ元) がフォローしているユーザー (繋ぎ先) をリレーション
+    public function followings()
+    {
+        // belongsToMany(リレーションしたいテーブルのモデル, 中間テーブル名, 繋ぎ元, 繋ぎ先)
+        return $this->belongsToMany(User::class, 'follows', 'follower_user_id', 'followee_user_id');
+    }
 }
