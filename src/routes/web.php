@@ -34,6 +34,7 @@ Route::middleware('auth')->controller(DailyController::class)->group(function ()
     Route::get('/daily/create', 'create')->name('daily.create');
     Route::get('/daily/{daily}', 'show')->name('daily.show');
     Route::post('/daily', 'store')->name('daily.store');
+    Route::delete('/daily/{daily}', 'delete')->name('daily.delete');
 });
 
 require __DIR__.'/auth.php';

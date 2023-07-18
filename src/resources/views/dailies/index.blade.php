@@ -18,13 +18,32 @@
                     >
                         {{ $daily->title }}
                     </a>
+
                     <div class="flex pt-1 item-center text-gray-400 text-sm">
                         <p>{{ $daily->date }}</p>
                         <p class="pl-5">{{ $daily->user->name }}</p>
                     </div>
+                    
                     <p class="pt-3 text-base w-80 h-10 truncate">{{ $daily->body }}</p>
+                    <form action="/daily/{{ $daily->id }}" id="form_{{ $daily->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" onclick="deleteDaily({{ $daily->id }})" class="mt-1 px-2 py-1 text-sm bg-red-200 rounded-md hover:bg-red-300">
+                            削除
+                        </button>
+                    </form>
                 </div>
             @endforeach
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function deleteDaily(id){
+        'use strict'
+
+        if (confirm('削除すると復元できません。\n本当に削除しますか？ (物理削除)')) {
+            document.getElementById(`form_${id}`).submit();
+        }
+    }
+</script>
