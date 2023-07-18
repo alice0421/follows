@@ -13,4 +13,9 @@ class DailyController extends Controller
         $dailies = Auth::user()->dailies()->get();
         return view('dailies.index')->with(['dailies' => $dailies]);
     }
+
+    public function show(Daily $daily)
+    {
+        return view('dailies.show')->with(['daily' => $daily]);
+    }
 }

@@ -7,10 +7,14 @@
 
     <div>
         @foreach ($dailies as $daily)
-            <div class="py-6">
-                <h1 class="inline text-2xl font-bold">{{ $daily->title }}</h1>
+            <div class="pb-10">
+                <a href="{{ route('daily.show', ['daily' => $daily->id]) }}"
+                class="inline text-2xl text-blue-500 font-bold underline hover:no-underline"
+                >
+                    {{ $daily->title }}
+                </a>
                 <span class="pl-10 text-sm">{{ $daily->user->name }}</span>
-                <p class="pt-2 text-base">{{ $daily->body }}</p>
+                <p class="pt-3 text-base">{{ $daily->body }}</p>
             </div>
         @endforeach
     </div>
