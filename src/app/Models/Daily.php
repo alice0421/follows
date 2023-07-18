@@ -10,6 +10,7 @@ class Daily extends Model
     use HasFactory;
 
     protected $fillable = [
+        'date',
         'title',
         'body',
         'user_id',
