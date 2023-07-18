@@ -18,4 +18,18 @@ class DailyController extends Controller
     {
         return view('dailies.show')->with(['daily' => $daily]);
     }
+
+    public function create()
+    {
+        return view('dailies.create');
+    }
+
+    public function store(Request $request)
+    {
+        $daily_input = $request['daily'];
+        $daily_input['user_id'] = Auth::id();
+        $daily = Daily::create($daily_input);
+
+        return redirect()->route('daily.show', ['daily' => $daily->id]);
+    }
 }
