@@ -17,16 +17,16 @@
 
     <body class="font-sans antialiased">
         <div class="w-screen h-screen bg-white">
-            <div class="related w-[1200px] h-full mx-auto">
+            <div class="w-[1200px] h-full mx-auto">
                 <!-- Page Header -->
-                <div class="flex justify-between items-center px-6 pt-6 pb-16">
-                    <header >
+                <div class="flex justify-between items-center p-6">
+                    <header>
                         {{ $header }}
                     </header>
 
-                    <div class="absolute right-0 flex items-center justify-end p-2 pr-36 bg-gray-100">
+                    <div class="flex items-center justify-end p-3 bg-gray-100">
                         <!-- 検索 -->
-                        <form action="{{ route('daily.index') }}" method="POST" class="w-full mr-96">
+                        <form action="{{ route('daily.index') }}" method="POST" class="w-full mr-60">
                             @csrf
                             <input type="text" />
                             <x-primary-button type="submit" class="ml-5">Search</x-primary-button>
@@ -69,7 +69,7 @@
                 </div>
 
                 <!-- Page Content -->
-                <main class="px-6">
+                <main class="px-6 pb-6">
                     {{ $slot }}
                 </main>
             </div>
