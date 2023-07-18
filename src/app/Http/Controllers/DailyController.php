@@ -32,4 +32,10 @@ class DailyController extends Controller
 
         return redirect()->route('daily.show', ['daily' => $daily->id]);
     }
+
+    public function delete(Daily $daily)
+    {
+        $daily->delete();
+        return redirect()->route('daily.index');
+    }
 }
