@@ -22,6 +22,8 @@ class DailySeeder extends Seeder
                     'title' => 'Title '. $i,
                     'body' => 'This is body '. $i. '.',
                     'user_id' => $j,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
         }

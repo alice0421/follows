@@ -21,6 +21,8 @@ class UserSeeder extends Seeder
                 'name' => 'sample'. $i,
                 'email' => 'sample'. $i .'@gmail.com',
                 'password' => Hash::make('sample'. $i),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
