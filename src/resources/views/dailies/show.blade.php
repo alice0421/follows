@@ -14,5 +14,9 @@
             <p class="pl-5">{{ $daily->user->name }}</p>
         </div>
         <p class="pt-5 text-lg">{{ $daily->body }}</p>
+
+        <a href="{{ route('daily.edit', ['daily' => $daily->id]) }}">
+            <x-primary-button type="button" class="mt-4">編集</x-primary-button>
+        </a>
     </div>
 </x-app-layout>
