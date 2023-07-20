@@ -40,7 +40,8 @@ Route::middleware('auth')->controller(DailyController::class)->group(function ()
 
 Route::middleware('auth')->controller(FollowController::class)->group(function () {
     // Route::get('/follow', 'index')->name('follow.index');
-    Route::post('/follow/register', 'register')->name('follow.register');
+    Route::post('/follow', 'register')->name('follow.register');
+    Route::delete('/follow/{followee}', 'delete')->name('follow.delete');
 });
 
 require __DIR__.'/auth.php';

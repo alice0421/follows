@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            フレンドの新規登録・削除
+            フレンドの登録と削除ができます。
         </p>
     </header>
 
@@ -34,11 +34,28 @@
 
         <div class="pt-6">
             @foreach ($followings as $following)
-                <div class="flex pt-2">
-                    <p>{{ $following->name }}</p>
+                <div class="flex items-center pt-2">
+                    <form action="/follow/{{ $following->id }}" id="form_{{ $following->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" onclick="deleteFollowing({{ $following->id }})" class="px-2 py-1 text-sm bg-red-200 rounded-md hover:bg-red-300">
+                            削除
+                        </button>
+                    </form>
+                    <p class="ml-2">{{ $following->name }}</p>
                     <p class="ml-5">{{ $following->email }}</p>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
+
+<script>
+    function deleteFollowing(id){
+        'use strict'
+
+        if (confirm('削除すると復元できません。\n本当に削除しますか？ (物理削除)')) {
+            document.getElementById(`form_${id}`).submit();
+        }
+    }
+</script>
