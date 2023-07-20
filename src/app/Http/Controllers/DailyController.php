@@ -33,6 +33,18 @@ class DailyController extends Controller
         return redirect()->route('daily.show', ['daily' => $daily->id]);
     }
 
+    public function edit(Daily $daily)
+    {
+        return view('dailies.edit')->with(['daily' => $daily]);
+    }
+
+    public function update(Daily $daily, Request $request)
+    {
+        $daily_input = $request['daily'];
+        $daily->fill($daily_input)->save();
+        return redirect()->route('daily.show', ['daily' => $daily->id]);
+    }
+
     public function delete(Daily $daily)
     {
         $daily->delete();
