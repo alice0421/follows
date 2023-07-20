@@ -28,7 +28,7 @@
                         <!-- 検索 -->
                         <form action="{{ route('daily.index') }}" method="POST" class="w-full mr-60">
                             @csrf
-                            <input type="text" />
+                            <x-text-input type="text" />
                             <x-primary-button type="submit" class="ml-5">Search</x-primary-button>
                         </form>
 
