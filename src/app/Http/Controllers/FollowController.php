@@ -61,4 +61,12 @@ class FollowController extends Controller
 
         return back()->with(['success' => '指定したユーザーをフレンドに登録しました。']);
     }
+
+    public function delete(User $followee)
+    {
+        Auth::user()->followers()->detach($followee->id); // 自分がフォローしているユーザーを削除
+        $followee->followers()->detach(Auth::id()); // 自分をフォローしてくれているユーザーから自分を削除。
+
+        return redirect()->route('profile.edit');
+    }
 }
