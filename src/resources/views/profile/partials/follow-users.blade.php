@@ -21,7 +21,8 @@
                 </p>
             @endif   
             @if(session('success'))
-                <p class="absolute bottom-[-24px] text-sm text-blue-600"
+                <p
+                    class="absolute bottom-[-24px] text-sm text-blue-600"
                     x-data="{ show: true }"
                     x-show="show"
                     x-transition
@@ -38,7 +39,11 @@
                     <form action="/follow/{{ $following->id }}" id="form_{{ $following->id }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="button" onclick="deleteFollowing({{ $following->id }})" class="px-2 py-1 text-sm bg-red-200 rounded-md hover:bg-red-300">
+                        <button
+                            type="button"
+                            onclick="deleteFollowing({{ $following->id }})"
+                            class="px-2 py-1 text-sm bg-red-200 rounded-md hover:bg-red-300"
+                        >
                             削除
                         </button>
                     </form>
