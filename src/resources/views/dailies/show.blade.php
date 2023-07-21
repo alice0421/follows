@@ -10,7 +10,7 @@
             {{ $daily->title }}
         </h1>
         <div class="flex pt-1 item-center text-gray-400 text-sm">
-            <p>{{ $daily->date }}</p>
+            <p>{{ $daily->date->format('o/m/d') }}</p>
             <p class="pl-5">{{ $daily->user->name }}</p>
         </div>
         <p class="pt-5 text-lg">{{ $daily->body }}</p>

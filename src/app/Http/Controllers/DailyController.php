@@ -10,8 +10,14 @@ class DailyController extends Controller
 {
     public function index()
     {
-        $dailies = Auth::user()->dailies()->get();
-        return view('dailies.index')->with(['dailies' => $dailies]);
+        $my_dailies = Auth::user()->dailies()->orderby('updated_at', 'desc')->get();
+        // フォローしているユーザーのidのみ取得し、Collectionから配列に変換
+        $following_ids = Auth::user()->followings()->select('id')->get()->toArray();
+        // $following_idsは、キーがidとpivotの連想配列だったため、idのvalueのみ配列化 (array_column) -> これでフォローしているユーザーのidが配列になった
+        // whereInでフォローしているユーザーの日記を全件取得し、降順に並べ替え
+        $following_dailies = Daily::whereIn('user_id', array_column($following_ids, 'id'))->orderby('updated_at', 'desc')->get();
+        
+        return view('dailies.index')->with(['my_dailies' => $my_dailies, 'following_dailies' => $following_dailies]);
     }
 
     public function show(Daily $daily)
