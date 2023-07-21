@@ -14,7 +14,7 @@
                 id="daily_date"
                 name="daily[date]"
                 type="date"
-                value="{{ $daily->date }}"
+                value="{{ $daily->date->format('o-m-d') }}"
                 class="block mt-2 mb-5 text-base"
             />
 

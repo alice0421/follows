@@ -18,7 +18,7 @@
                     </a>
 
                     <div class="flex pt-1 item-center text-gray-400 text-sm">
-                        <p>{{ $my_daily->date }}</p>
+                        <p>{{ $my_daily->date->format('o/m/d') }}</p>
                         <p class="pl-5">{{ $my_daily->user->name }}</p>
                     </div>
                     
@@ -27,7 +27,7 @@
                         @csrf
                         @method('DELETE')
                         <button
-                            type="button"
+                            type="submit"
                             onclick="deleteDaily({{ $my_daily->id }})"
                             class="mt-1 px-2 py-1 text-sm bg-red-200 rounded-md hover:bg-red-300"
                         >
@@ -39,9 +39,9 @@
         </div>
 
         <!-- フォローしているユーザー (フレンド) の日記 -->
-        <div>
+        <div class="ml-20">
             @foreach ($following_dailies as $following_daily)
-                <div class="pb-10">
+                <div class="pb-[72px]">
                     <a
                         href="{{ route('daily.show', ['daily' => $following_daily->id]) }}"
                         class="block w-60 truncate text-2xl text-blue-500 font-bold underline hover:no-underline"
@@ -50,22 +50,11 @@
                     </a>
 
                     <div class="flex pt-1 item-center text-gray-400 text-sm">
-                        <p>{{ $following_daily->date }}</p>
+                        <p>{{ $following_daily->date->format('o/m/d') }}</p>
                         <p class="pl-5">{{ $following_daily->user->name }}</p>
                     </div>
                     
                     <p class="pt-3 text-base w-80 h-10 truncate">{{ $following_daily->body }}</p>
-                    <form action="/daily/{{ $following_daily->id }}" id="following_form_{{ $following_daily->id }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button
-                            type="button"
-                            onclick="deleteDaily({{ $following_daily->id }})"
-                            class="mt-1 px-2 py-1 text-sm bg-red-200 rounded-md hover:bg-red-300"
-                        >
-                            削除
-                        </button>
-                    </form>
                 </div>
             @endforeach
         </div>
