@@ -16,14 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'edit')->name('profile.edit');
     Route::patch('/profile', 'update')->name('profile.update');
@@ -31,7 +23,8 @@ Route::middleware('auth')->controller(ProfileController::class)->group(function 
 });
 
 Route::middleware('auth')->controller(DailyController::class)->group(function () {
-    Route::get('/daily', 'index')->name('daily.index');
+    Route::get('/', 'dashboard')->name('daily.dashboard');
+    Route::get('/daily/user_{user}', 'index')->name('daily.index');
     Route::get('/daily/create', 'create')->name('daily.create');
     Route::post('/daily', 'store')->name('daily.store');
     Route::get('/daily/{daily}', 'show')->name('daily.show');

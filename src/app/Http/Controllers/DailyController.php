@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Daily;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DailyController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
         $my_dailies = Auth::user()->dailies()->orderby('updated_at', 'desc')->get();
         
@@ -18,7 +19,13 @@ class DailyController extends Controller
         // whereInでフォローしているユーザーの日記を全件取得し、降順に並べ替え
         $following_dailies = Daily::whereIn('user_id', array_column($following_ids, 'id'))->orderby('updated_at', 'desc')->get();
         
-        return view('dailies.index')->with(['my_dailies' => $my_dailies, 'following_dailies' => $following_dailies]);
+        return view('dailies.dashboard')->with(['my_dailies' => $my_dailies, 'following_dailies' => $following_dailies]);
+    }
+
+    public function index(User $user)
+    {
+        $dailies = $user->dailies()->orderby('updated_at', 'desc')->get();
+        return view('dailies.index')->with(['dailies' => $dailies]);
     }
 
     public function show(Daily $daily)
@@ -67,6 +74,6 @@ class DailyController extends Controller
         $this->authorize('delete', $daily);
 
         $daily->delete();
-        return redirect()->route('daily.index');
+        return redirect()->route('daily.dashboard');
     }
 }
