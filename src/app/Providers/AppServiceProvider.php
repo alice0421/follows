@@ -6,6 +6,11 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        // 紐づけたいModel => 紐づけたいPolicy
+        'App\Models\Daily' => 'App\Policies\DailytPolicy',
+    ];    
+
     /**
      * Register any application services.
      *

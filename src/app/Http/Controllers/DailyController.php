@@ -11,6 +11,7 @@ class DailyController extends Controller
     public function index()
     {
         $my_dailies = Auth::user()->dailies()->orderby('updated_at', 'desc')->get();
+        
         // フォローしているユーザーのidのみ取得し、Collectionから配列に変換
         $following_ids = Auth::user()->followings()->select('id')->get()->toArray();
         // $following_idsは、キーがidとpivotの連想配列だったため、idのvalueのみ配列化 (array_column) -> これでフォローしているユーザーのidが配列になった
@@ -22,6 +23,9 @@ class DailyController extends Controller
 
     public function show(Daily $daily)
     {
+        // 自分とフレンドのみ閲覧を許可
+        $this->authorize('show', $daily);
+
         return view('dailies.show')->with(['daily' => $daily]);
     }
 
@@ -41,11 +45,17 @@ class DailyController extends Controller
 
     public function edit(Daily $daily)
     {
+        // 自分とフレンドのみ編集を許可
+        $this->authorize('edit', $daily);
+
         return view('dailies.edit')->with(['daily' => $daily]);
     }
 
     public function update(Daily $daily, Request $request)
     {
+        // 自分とフレンドのみ更新を許可
+        $this->authorize('update', $daily);
+
         $daily_input = $request['daily'];
         $daily->fill($daily_input)->save();
         return redirect()->route('daily.show', ['daily' => $daily->id]);
@@ -53,6 +63,9 @@ class DailyController extends Controller
 
     public function delete(Daily $daily)
     {
+        // 自分のみ削除を許可
+        $this->authorize('delete', $daily);
+
         $daily->delete();
         return redirect()->route('daily.index');
     }
