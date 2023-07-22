@@ -39,15 +39,16 @@
                     <form action="/follow/{{ $following->id }}" id="form_{{ $following->id }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button
-                            type="button"
-                            onclick="deleteFollowing({{ $following->id }})"
-                            class="px-2 py-1 text-sm bg-red-200 rounded-md hover:bg-red-300"
-                        >
+                        <x-danger-button type="button" onclick="deleteFollowing({{ $following->id }})">
                             削除
-                        </button>
+                        </x-danger-button>
                     </form>
-                    <p class="ml-2">{{ $following->name }}</p>
+                    <a
+                        href="{{ route('daily.index', $following->id) }}"
+                        class="text-blue-400 underline hover:no-underline"
+                    >
+                        <p class="ml-2">{{ $following->name }}</p>
+                    </a>
                     <p class="ml-5">{{ $following->email }}</p>
                 </div>
             @endforeach

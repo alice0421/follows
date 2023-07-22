@@ -28,7 +28,7 @@
 
                 <!-- Menu Bar -->
                 <div class="px-6">
-                    <a href="{{ route('daily.index') }}">
+                    <a href="{{ route('daily.dashboard') }}">
                         <x-primary-button type="button">ホーム</x-primary-button>
                     </a>
                     <a href="{{ route('daily.create') }}" class="ml-4">

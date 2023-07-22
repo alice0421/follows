@@ -11,12 +11,19 @@
         </h1>
         <div class="flex pt-1 item-center text-gray-400 text-sm">
             <p>{{ $daily->date->format('o/m/d') }}</p>
-            <p class="pl-5">{{ $daily->user->name }}</p>
+            <a
+                href="{{ route('daily.index', $daily->user->id) }}"
+                class="text-blue-400 underline hover:no-underline"
+            >
+                <p class="pl-5">{{ $daily->user->name }}</p>
+            </a>
         </div>
         <p class="pt-5 text-lg">{{ $daily->body }}</p>
 
         <a href="{{ route('daily.edit', ['daily' => $daily->id]) }}">
-            <x-primary-button type="button" class="mt-4">編集</x-primary-button>
+            <x-primary-button type="button" class="mt-4">
+                編集
+            </x-primary-button>
         </a>
     </div>
 </x-app-layout>
