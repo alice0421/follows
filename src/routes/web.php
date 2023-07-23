@@ -25,6 +25,7 @@ Route::middleware('auth')->controller(ProfileController::class)->group(function 
 Route::middleware('auth')->controller(DailyController::class)->group(function () {
     Route::get('/', 'dashboard')->name('daily.dashboard');
     Route::get('/daily/user_{user}', 'index')->name('daily.index');
+    Route::get('/daily/search', 'search')->name('daily.search');
     Route::get('/daily/create', 'create')->name('daily.create');
     Route::post('/daily', 'store')->name('daily.store');
     Route::get('/daily/{daily}', 'show')->name('daily.show');

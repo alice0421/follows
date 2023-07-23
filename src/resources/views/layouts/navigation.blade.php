@@ -1,8 +1,7 @@
 <nav class="flex items-center justify-end p-3 bg-gray-100">
     <!-- 検索 -->
-    <form action="" method="POST" class="w-full mr-60">
-        @csrf
-        <x-text-input type="text" />
+    <form action="{{ route('daily.search') }}" method="GET" class="w-full mr-60">
+        <x-text-input name='keyword' type="text" />
         <x-primary-button type="submit" class="ml-5">検索</x-primary-button>
     </form>
 
