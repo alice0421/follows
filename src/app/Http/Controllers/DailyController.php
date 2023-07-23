@@ -76,4 +76,23 @@ class DailyController extends Controller
         $daily->delete();
         return redirect()->route('daily.dashboard');
     }
+
+    public function search(Request $request)
+    {
+        $keyword = $request['keyword'];
+
+        $dailies = collect();
+        $users = collect();
+        if(!empty($keyword)) {
+            $dailies = Daily::where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('body', 'LIKE', "%{$keyword}%")
+                ->orWhere('date', 'LIKE', "%{$keyword}%")
+                ->get();
+            $users = User::where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('email', 'LIKE', "%{$keyword}%")
+                ->get();
+        }
+
+        return view('dailies.search')->with(['dailies' => $dailies, 'users' => $users]);
+    }
 }
