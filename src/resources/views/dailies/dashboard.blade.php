@@ -40,7 +40,7 @@
         </div>
 
         <!-- フォローしているユーザー (フレンド) の日記 -->
-        <div class="">
+        <div class="ml-20">
             @foreach ($following_dailies as $following_daily)
                 <div class="pb-[74px]">
                     <a
